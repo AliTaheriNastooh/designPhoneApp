@@ -13,6 +13,8 @@ import androidx.core.view.isVisible
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import kotlinx.android.synthetic.main.activity_call.*
+import kotlinx.coroutines.experimental.delay
+import kotlinx.coroutines.experimental.launch
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledFuture
 import java.util.concurrent.TimeUnit
@@ -25,6 +27,7 @@ class CallActivity : AppCompatActivity() {
     var char1='0';
     var flagme=true;
     var visibilityFloatingPointButton=false;
+    var playerDTMF:PlayDTMF=PlayDTMF()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_call)
@@ -38,18 +41,18 @@ class CallActivity : AppCompatActivity() {
     }
     fun dtmfButton(v:View){
         when (v.id) {
-            R.id.button0 ->OngoingCall.playDtmf('0')
-            R.id.button1 ->OngoingCall.playDtmf('1')
-            R.id.button2 ->OngoingCall.playDtmf('2')
-            R.id.button3 ->OngoingCall.playDtmf('3')
-            R.id.button4 ->OngoingCall.playDtmf('4')
-            R.id.button5 ->OngoingCall.playDtmf('5')
-            R.id.button6 ->OngoingCall.playDtmf('6')
-            R.id.button7 ->OngoingCall.playDtmf('7')
-            R.id.button8 ->OngoingCall.playDtmf('8')
-            R.id.button9 ->OngoingCall.playDtmf('9')
-            R.id.buttonAsterisk ->OngoingCall.playDtmf('*')
-            R.id.buttonHash ->OngoingCall.playDtmf('#')
+            R.id.button0 ->playerDTMF.startPlayDTMF('0')
+            R.id.button1 ->playerDTMF.startPlayDTMF('1')
+            R.id.button2 ->playerDTMF.startPlayDTMF('2')
+            R.id.button3 ->playerDTMF.startPlayDTMF('3')
+            R.id.button4 ->playerDTMF.startPlayDTMF('4')
+            R.id.button5 ->playerDTMF.startPlayDTMF('5')
+            R.id.button6 ->playerDTMF.startPlayDTMF('6')
+            R.id.button7 ->playerDTMF.startPlayDTMF('7')
+            R.id.button8 ->playerDTMF.startPlayDTMF('8')
+            R.id.button9 ->playerDTMF.startPlayDTMF('9')
+            R.id.buttonAsterisk ->playerDTMF.startPlayDTMF('*')
+            R.id.buttonHash ->playerDTMF.startPlayDTMF('#')
         }
     }
     fun playDTMF() {

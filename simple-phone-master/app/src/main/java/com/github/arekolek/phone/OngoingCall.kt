@@ -3,6 +3,8 @@ package com.github.arekolek.phone
 import android.telecom.Call
 import android.telecom.VideoProfile
 import io.reactivex.subjects.BehaviorSubject
+import kotlinx.coroutines.experimental.delay
+import kotlinx.coroutines.experimental.launch
 import timber.log.Timber
 import java.util.*
 
@@ -35,8 +37,12 @@ object OngoingCall {
     }
     fun playDtmf( num:Char){
         call!!.playDtmfTone(num);
-        Thread.sleep(2000);
-        stopDtmf();
+        launch {
+            delay(2000)
+            stopDtmf();
+            //    println("Hello from Kotlin Coroutines!")
+        }
+        //stopDtmf();
 
     }
     fun stopDtmf(){
